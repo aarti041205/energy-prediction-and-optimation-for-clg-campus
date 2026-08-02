@@ -1,0 +1,39 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+
+# Virtual Environments
+venv/
+env/
+ENV/
+
+# Python & Caching
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Large Model Artifacts & Fallback Databases
+saved_models/
+*.pkl
+*.joblib
+*.db
+*.sqlite
+*.sqlite3
+campus_energy_fallback.db
+
+# Large Log Files & Heavy Telemetry Artifacts
+logs/
+*.log
+knowledge_base/anomaly_report.txt
+
+# Vector DB Indexes
+vector_db/
+vector_store/
+
+# OS System Files
+.DS_Store
+Thumbs.db

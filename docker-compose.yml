@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: campus_energy_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-campus_energy}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  fastapi_backend:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    container_name: campus_energy_api
+    restart: always
+    command: uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --workers 4
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+psycopg2://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-campus_energy}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SENDER_EMAIL=${SENDER_EMAIL}
+      - RECIPIENT_EMAILS=${RECIPIENT_EMAILS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+      - ./saved_models:/app/saved_models
+
+  streamlit_dashboard:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    container_name: campus_energy_dashboard
+    restart: always
+    command: streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://fastapi_backend:8000
+    depends_on:
+      - fastapi_backend
+
+volumes:
+  postgres_data:

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Energy Ops - Command Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand-header">
+                <div class="brand-logo">⚡</div>
+                <div>
+                    <div class="brand-title">Campus Energy Ops</div>
+                    <div class="brand-subtitle">Pro Plan v1.0</div>
+                </div>
+            </div>
+
+            <div class="nav-section">MONITOR</div>
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="#" onclick="showSection('dashboard')">
+                        <div class="nav-left">
+                            <span class="nav-icon">🏠</span>
+                            <span>Dashboard</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="openPredictModal()">
+                        <div class="nav-left">
+                            <span class="nav-icon">⚡</span>
+                            <span>Predictions</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="showSection('analytics')">
+                        <div class="nav-left">
+                            <span class="nav-icon">📊</span>
+                            <span>Analytics</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="showSection('optimization')">
+                        <div class="nav-left">
+                            <span class="nav-icon">💡</span>
+                            <span>Optimization</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="showSection('alerts')">
+                        <div class="nav-left">
+                            <span class="nav-icon">🚨</span>
+                            <span>Alerts</span>
+                        </div>
+                        <span class="badge" id="alert-count-badge">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="openChatModal()">
+                        <div class="nav-left">
+                            <span class="nav-icon">🤖</span>
+                            <span>AI Assistant</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-section">ACCOUNT</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" onclick="showSection('settings')">
+                        <div class="nav-left">
+                            <span class="nav-icon">⚙️</span>
+                            <span>Settings</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="alert('Help & Support: Visit https://campusenergy.ai/docs')">
+                        <div class="nav-left">
+                            <span class="nav-icon">❓</span>
+                            <span>Help & Support</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="collapse-btn">
+                    <span>»</span>
+                    <span>Collapse</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace View -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-header">
+                <div>
+                    <div class="page-header-title">
+                        Dashboard
+                        <span class="live-badge"><span class="live-dot"></span> Live</span>
+                    </div>
+                    <div class="page-header-subtitle" id="header-status-text">3 alerts need review</div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="openPredictModal()">+ New Prediction</button>
+                    <div class="icon-btn" onclick="showSection('alerts')">
+                        🔔
+                        <div class="notification-dot"></div>
+                    </div>
+                    <div class="icon-btn">👤</div>
+                </div>
+            </header>
+
+            <!-- Top Row: 4 KPI Cards -->
+            <section class="kpi-grid">
+                <!-- Card 1 -->
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <div class="kpi-icon-wrapper" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B;">⚡</div>
+                        <div class="kpi-trend-pill up">▲ 12%</div>
+                    </div>
+                    <div class="kpi-label">TOTAL ENERGY LOAD</div>
+                    <div class="kpi-val" id="kpi-total-energy">1,250,000 kWh</div>
+                    <svg class="sparkline-svg" viewBox="0 0 100 30" preserveAspectRatio="none">
+                        <path d="M0,25 Q15,10 30,20 T60,12 T90,5 L100,8" fill="none" stroke="#10B981" stroke-width="2.5"/>
+                    </svg>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <div class="kpi-icon-wrapper" style="background: rgba(6, 182, 212, 0.15); color: #06B6D4;">👤</div>
+                        <div class="kpi-trend-pill up">▲ 5%</div>
+                    </div>
+                    <div class="kpi-label">ACTIVE CAMPUS LOAD</div>
+                    <div class="kpi-val" id="kpi-active-load">285.4 kWh</div>
+                    <svg class="sparkline-svg" viewBox="0 0 100 30" preserveAspectRatio="none">
+                        <path d="M0,22 Q20,15 40,25 T70,10 T100,14" fill="none" stroke="#06B6D4" stroke-width="2.5"/>
+                    </svg>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <div class="kpi-icon-wrapper" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">💰</div>
+                        <div class="kpi-trend-pill up">▲ 8%</div>
+                    </div>
+                    <div class="kpi-label">POTENTIAL SAVINGS</div>
+                    <div class="kpi-val" id="kpi-total-savings">₹ 145,000</div>
+                    <svg class="sparkline-svg" viewBox="0 0 100 30" preserveAspectRatio="none">
+                        <path d="M0,28 Q25,20 50,15 T75,8 T100,4" fill="none" stroke="#10B981" stroke-width="2.5"/>
+                    </svg>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <div class="kpi-icon-wrapper" style="background: rgba(244, 63, 94, 0.15); color: #F43F5E;">🚨</div>
+                        <div class="kpi-trend-pill down">▼ 2%</div>
+                    </div>
+                    <div class="kpi-label">ANOMALY RATE</div>
+                    <div class="kpi-val" id="kpi-anomaly-rate">1.4%</div>
+                    <svg class="sparkline-svg" viewBox="0 0 100 30" preserveAspectRatio="none">
+                        <path d="M0,10 Q20,18 40,12 T70,22 T100,28" fill="none" stroke="#F43F5E" stroke-width="2.5"/>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Main Panel Grid -->
+            <section class="dashboard-grid">
+                <!-- Column 1: Recent Activity -->
+                <div class="dashboard-column">
+                    <div class="ops-box">
+                        <div class="box-header">
+                            <div class="box-title">Recent Activity</div>
+                            <a href="#" class="box-action" onclick="showSection('alerts')">View all</a>
+                        </div>
+
+                        <div class="activity-list" id="activity-list-container">
+                            <!-- Item 1 -->
+                            <div class="activity-row">
+                                <div class="activity-avatar" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">⚡</div>
+                                <div class="activity-details">
+                                    <div class="activity-main-title">Peak Demand Alert #1842 triggered</div>
+                                    <div class="activity-sub-desc">450.0 kWh • AI Lab Chiller unit</div>
+                                </div>
+                                <div class="activity-timestamp">2m ago</div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="activity-row">
+                                <div class="activity-avatar" style="background: rgba(6, 182, 212, 0.15); color: #06B6D4;">👤</div>
+                                <div class="activity-details">
+                                    <div class="activity-main-title">Chiller HVAC setpoint adjusted</div>
+                                    <div class="activity-sub-desc">Target setpoint set to 24°C in Library</div>
+                                </div>
+                                <div class="activity-timestamp">5m ago</div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="activity-row">
+                                <div class="activity-avatar" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B;">⚙️</div>
+                                <div class="activity-details">
+                                    <div class="activity-main-title">Abnormal equipment load warning</div>
+                                    <div class="activity-sub-desc">Hostel Block A • 85% load ratio</div>
+                                </div>
+                                <div class="activity-timestamp">10m ago</div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="activity-row">
+                                <div class="activity-avatar" style="background: rgba(59, 130, 246, 0.15); color: #3B82F6;">🏠</div>
+                                <div class="activity-details">
+                                    <div class="activity-main-title">Nightly telemetry sync completed</div>
+                                    <div class="activity-sub-desc">All PostgreSQL tables synced</div>
+                                </div>
+                                <div class="activity-timestamp">1h ago</div>
+                            </div>
+
+                            <!-- Item 5 -->
+                            <div class="activity-row">
+                                <div class="activity-avatar" style="background: rgba(244, 63, 94, 0.15); color: #F43F5E;">🔔</div>
+                                <div class="activity-details">
+                                    <div class="activity-main-title">Critical email notification sent</div>
+                                    <div class="activity-sub-desc">Facility Engineer • Critical severity alert</div>
+                                </div>
+                                <div class="activity-timestamp">2h ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Stats & Top Facilities -->
+                <div class="dashboard-column">
+                    <!-- Quick Stats Box -->
+                    <div class="ops-box">
+                        <div class="box-header">
+                            <div class="box-title">Quick Stats</div>
+                        </div>
+
+                        <div class="stat-progress-group">
+                            <div class="stat-progress-item">
+                                <div class="stat-progress-meta">
+                                    <span>Baseline Efficiency</span>
+                                    <span style="color: #06B6D4;">88%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 88%; background-color: #06B6D4;"></div>
+                                </div>
+                            </div>
+
+                            <div class="stat-progress-item">
+                                <div class="stat-progress-meta">
+                                    <span>Peak Shifting Capacity</span>
+                                    <span style="color: #F59E0B;">45%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 45%; background-color: #F59E0B;"></div>
+                                </div>
+                            </div>
+
+                            <div class="stat-progress-item">
+                                <div class="stat-progress-meta">
+                                    <span>Solar PV Offset Target</span>
+                                    <span style="color: #10B981;">84%</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" style="width: 84%; background-color: #10B981;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Facilities Box -->
+                    <div class="ops-box">
+                        <div class="box-header">
+                            <div class="box-title">Top Facilities</div>
+                        </div>
+
+                        <div class="facility-list">
+                            <div class="facility-row">
+                                <span class="facility-name">AI Supercomputing Lab</span>
+                                <span class="facility-metric">450,000 kWh</span>
+                            </div>
+                            <div class="facility-row">
+                                <span class="facility-name">Student Residence Hostel</span>
+                                <span class="facility-metric">510,000 kWh</span>
+                            </div>
+                            <div class="facility-row">
+                                <span class="facility-name">Central University Library</span>
+                                <span class="facility-metric">290,000 kWh</span>
+                            </div>
+                            <div class="facility-row">
+                                <span class="facility-name">Administration Building</span>
+                                <span class="facility-metric">260,000 kWh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Prediction Modal -->
+    <div class="modal-overlay" id="predict-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">⚡ ML Energy Prediction Simulator</div>
+                <div class="close-btn" onclick="closeModal('predict-modal')">✕</div>
+            </div>
+            <form id="predict-form" onsubmit="handlePrediction(event)">
+                <div class="form-group">
+                    <label class="form-label">Facility Building</label>
+                    <select class="form-select" id="p-building">
+                        <option value="AI Lab">AI Supercomputing Lab</option>
+                        <option value="Library">Central Library</option>
+                        <option value="Hostel">Student Residence Hostel</option>
+                        <option value="Administration">Administration Complex</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ambient Temperature (°C)</label>
+                    <input type="number" class="form-input" id="p-temp" value="32.0" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Hour of Day (0-23)</label>
+                    <input type="number" class="form-input" id="p-hour" value="14" min="0" max="23">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Equipment Load Factor (0.0 - 1.0)</label>
+                    <input type="number" class="form-input" id="p-load" value="0.85" step="0.05" min="0" max="1">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Run Prediction Engine</button>
+            </form>
+            <div id="predict-result" style="margin-top: 16px; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="modal-overlay" id="chat-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">🤖 AI Gemini RAG Assistant</div>
+                <div class="close-btn" onclick="closeModal('chat-modal')">✕</div>
+            </div>
+            <div id="chat-log" style="height: 220px; overflow-y: auto; background: #0F131D; padding: 12px; border-radius: 8px; margin-bottom: 12px; font-size: 13px; color: #CBD5E1;">
+                <div><b>AI Assistant:</b> Hello! How can I assist you with campus energy baseline or HVAC optimization today?</div>
+            </div>
+            <form onsubmit="handleChatSubmit(event)">
+                <input type="text" class="form-input" id="chat-input" placeholder="Type your query..." style="margin-bottom: 8px;">
+                <button type="submit" class="btn-primary" style="width: 100%;">Send Query</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

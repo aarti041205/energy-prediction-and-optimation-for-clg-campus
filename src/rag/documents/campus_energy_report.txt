@@ -1,0 +1,48 @@
+Campus Energy Optimization Report
+
+The college campus consists of five major facilities:
+
+1. AI Lab
+2. Library
+3. Hostel
+4. Administration Block
+5. Classroom Block
+
+Average energy usage:
+
+AI Lab:
+Highest electricity consumption because of GPUs and servers.
+
+Library:
+Moderate electricity usage.
+
+Hostel:
+High night-time electricity consumption.
+
+Administration:
+Low electricity usage.
+
+Classrooms:
+Peak usage between 9 AM and 4 PM.
+
+Optimization Strategies
+
+• Shift laboratory work after 6 PM during non-peak hours.
+• Install rooftop solar panels.
+• Replace fluorescent lights with LED lighting.
+• Use motion sensors in classrooms.
+• Schedule HVAC systems automatically.
+
+Common Energy Anomalies
+
+• Faulty AC units
+• Lights left ON overnight
+• Laboratory equipment running after office hours
+
+Sustainability Goals
+
+Reduce campus energy consumption by 15%.
+
+Reduce carbon emissions by 10%.
+
+Increase renewable energy usage to 30%.

@@ -1,0 +1,14 @@
+[Unit]
+Description=Campus Energy Streamlit Dashboard Service
+After=network.target fastapi.service
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Energy-Prediction-Optimization-System
+ExecStart=/home/ubuntu/Energy-Prediction-Optimization-System/venv/bin/streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0
+Restart=always
+RestartSec=5
+EnvironmentFile=/home/ubuntu/Energy-Prediction-Optimization-System/.env
+
+[Install]
+WantedBy=multi-user.target

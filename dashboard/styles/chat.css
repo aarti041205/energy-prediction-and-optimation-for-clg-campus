@@ -1,0 +1,60 @@
+/* Enterprise Chat & RAG Component Styling */
+.saas-chat-container {
+    background: #0F172A;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 520px;
+}
+
+.saas-chat-scroll {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.saas-chat-bubble {
+    max-width: 82%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.6;
+    position: relative;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+.saas-chat-bubble.user {
+    align-self: flex-end;
+    background: #3B82F6;
+    color: #FFFFFF;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+}
+
+.saas-chat-bubble.assistant {
+    align-self: flex-start;
+    background: #1E293B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #F8FAFC;
+    border-bottom-left-radius: 4px;
+}
+
+.saas-source-card {
+    background: rgba(15, 23, 42, 0.6);
+    border-left: 3px solid #3B82F6;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #94A3B8;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}

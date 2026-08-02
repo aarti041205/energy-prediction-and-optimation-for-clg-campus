@@ -1,0 +1,50 @@
+Building            Robotics_Lab
+Energy_kWh            6197769.36
+Electricity_Cost     52681039.56
+Carbon_Emission     5082170.8752
+------------------------------------------------------------
+Building                 AI_Lab
+Energy_kWh            6197703.5
+Electricity_Cost    52680479.75
+Carbon_Emission      5082116.87
+------------------------------------------------------------
+Building                Hostel_B
+Energy_kWh            5377772.05
+Electricity_Cost    45711062.425
+Carbon_Emission      4409773.081
+------------------------------------------------------------
+Building               Hostel_A
+Energy_kWh            5371752.7
+Electricity_Cost    45659897.95
+Carbon_Emission     4404837.214
+------------------------------------------------------------
+Building                 Block_B
+Energy_kWh            4100199.59
+Electricity_Cost    34851696.515
+Carbon_Emission     3362163.6638
+------------------------------------------------------------
+Building                 Block_A
+Energy_kWh            4090413.93
+Electricity_Cost    34768518.405
+Carbon_Emission     3354139.4226
+------------------------------------------------------------
+Building               Cafeteria
+Energy_kWh            3741904.93
+Electricity_Cost    31806191.905
+Carbon_Emission     3068362.0426
+------------------------------------------------------------
+Building            Central_Library
+Energy_kWh               3658447.22
+Electricity_Cost        31096801.37
+Carbon_Emission        2999926.7204
+------------------------------------------------------------
+Building            Sports_Complex
+Energy_kWh              3415039.76
+Electricity_Cost       29027837.96
+Carbon_Emission       2800332.6032
+------------------------------------------------------------
+Building             Admin_Block
+Energy_kWh            3052883.95
+Electricity_Cost    25949513.575
+Carbon_Emission      2503364.839
+------------------------------------------------------------

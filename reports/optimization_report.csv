@@ -1,0 +1,7 @@
+category,recommendation,energy_saving_pct,estimated_savings_kwh,estimated_savings_inr,carbon_reduction_kg,priority
+HVAC Optimization,Adjust chilled water temperature to 7°C and set indoor thermostats to 24°C in AI Lab.,14.5,58.0,493.0,47.56,High
+Lighting Optimization,Enable daylight harvesting controls and schedule automated LED dimming after 19:00.,8.0,32.0,272.0,26.24,Medium
+Equipment Scheduling,Stagger heavy laboratory equipment and autoclave cycles during non-peak utility hours.,10.0,40.0,340.0,32.8,High
+Peak Load Shifting,Shift 48.0 kWh of non-critical loads away from 14:00 - 18:00 tariff peak.,12.0,48.0,408.0,39.36,High
+Solar Utilization,Direct 140 kW rooftop PV output to high-demand computer lab clusters.,18.0,560.0,4760.0,459.2,Medium
+Battery Energy Storage,Pre-charge campus BESS (85 kWh) during night tariffs for peak discharge.,9.5,85.0,722.5,69.7,Low
